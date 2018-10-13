@@ -30,16 +30,12 @@ public class NumbersActivity extends AppCompatActivity {
 
         LinearLayout numbersLayout = (LinearLayout) findViewById(R.id.rootView);
 
-        int i = 0;
-
-        while(i < words.size())
+        for (int i = 0; i < words.size(); i++)
         {
             TextView numberText = new TextView(this);
             numberText.setText(words.get(i));
 
             numbersLayout.addView(numberText);
-
-            i++;
         }
     }
 }
