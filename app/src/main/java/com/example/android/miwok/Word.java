@@ -1,11 +1,14 @@
 package com.example.android.miwok;
 
 import android.content.Context;
+import android.opengl.Visibility;
+import android.view.View;
 
 public class Word {
     private String mMiwokTranslation;
     private String mDefaultTranslation;
-    private int mImageResourceId;
+    private final int NO_IMAGE = -1;
+    private int mImageResourceId = NO_IMAGE;
 
     public Word(String defaultTranslation, String miwokTranslation)
     {
@@ -17,8 +20,8 @@ public class Word {
     {
         mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
+        mImageResourceId = imageResourceId;
     }
-
 
     public String getMiwokTranslation()
     {
@@ -29,7 +32,11 @@ public class Word {
         return mDefaultTranslation;
     }
 
-    public int getmImageResourceId() {
+    public int getImageResourceId() {
         return mImageResourceId;
+    }
+
+    public boolean hasImage(){
+        return mImageResourceId != NO_IMAGE;
     }
 }

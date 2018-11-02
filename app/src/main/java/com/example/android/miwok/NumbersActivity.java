@@ -1,7 +1,12 @@
 package com.example.android.miwok;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -11,6 +16,7 @@ public class NumbersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.word_list);
 
         ArrayList<Word> words = new ArrayList<>();
@@ -26,7 +32,7 @@ public class NumbersActivity extends AppCompatActivity {
         words.add(new Word("nine", "wo'e", R.drawable.number_nine));
         words.add(new Word("ten", "n'aacha", R.drawable.number_ten));
 
-        WordAdapter itemsAdapter = new WordAdapter(this, words);
+        WordAdapter itemsAdapter = new WordAdapter(this, words, "#FD8E09");
 
         ListView listView = (ListView) findViewById(R.id.list);
 
