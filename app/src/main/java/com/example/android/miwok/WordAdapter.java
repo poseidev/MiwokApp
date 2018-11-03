@@ -1,10 +1,10 @@
 package com.example.android.miwok;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +17,12 @@ import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
-    private ArrayList<Word> mWords;
-    private String mWordsBackgroundColor;
+    private int mColorResourceId;
 
-    public WordAdapter(@NonNull Context context, ArrayList<Word> words, String wordsBackgroundColor) {
+    public WordAdapter(@NonNull Context context, ArrayList<Word> words, int colorResourceId) {
         super(context, 0, words);
 
-        mWordsBackgroundColor = wordsBackgroundColor;
+        mColorResourceId = colorResourceId;
     }
 
     @NonNull
@@ -35,9 +34,6 @@ public class WordAdapter extends ArrayAdapter<Word> {
                 R.layout.list_item, parent, false
             );
         }
-
-        LinearLayout wordsLayout = (LinearLayout) listItemView.findViewById(R.id.wordsLayout);
-        wordsLayout.setBackgroundColor(Color.parseColor(mWordsBackgroundColor));
 
         Word currentWord = getItem(position);
 
@@ -55,6 +51,14 @@ public class WordAdapter extends ArrayAdapter<Word> {
         else{
             imageView.setVisibility(View.GONE);
         }
+
+        View textContainer = (LinearLayout) listItemView.findViewById(R.id.textContainer);
+
+        //Find the color that the resource ID maps to
+        int color = ContextCompat.getColor(getContext(), mColorResourceId);
+
+        //Set the background color of the text container
+        textContainer.setBackgroundColor(color);
 
         return listItemView;
     }
