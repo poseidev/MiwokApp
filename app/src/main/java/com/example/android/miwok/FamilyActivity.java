@@ -1,8 +1,11 @@
 package com.example.android.miwok;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,8 +17,33 @@ public class FamilyActivity extends AppCompatActivity {
     private MediaPlayer mMediaPlayer;
     private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
-        public void onCompletion(MediaPlayer mp) {
-            releaseMediaPlayer();
+        public void onCompletion(MediaPlayer mp) { releaseMediaPlayer(); }
+    };
+
+    private AudioManager mAudioManager;
+    private AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener()
+    {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch (focusChange)
+            {
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    // Lost audio focus for short amount of time
+                    // Or app can allow to play but at a lower volume
+
+                    mMediaPlayer.pause();
+                    mMediaPlayer.seekTo(0);
+                    break;
+
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    mMediaPlayer.start();
+                    break;
+
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    releaseMediaPlayer();
+                    break;
+            }
         }
     };
 
@@ -23,6 +51,8 @@ public class FamilyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
+
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList<Word> words = new ArrayList<>();
 
@@ -48,6 +78,23 @@ public class FamilyActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Word word = words.get(position);
 
+                // Release the media player if it currently exists because we are about to
+                // play a different sound file.
+                releaseMediaPlayer();
+
+                int result = mAudioManager.requestAudioFocus(onAudioFocusChangeListener,
+                        // Use music stream
+                        AudioManager.STREAM_MUSIC,
+
+                        //Request permanent focus
+                        AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
+                if(result != AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
+                {
+                    return;
+                }
+
+                Log.v("FamilyActivity", "Play sound.");
                 mMediaPlayer = MediaPlayer.create(FamilyActivity.this, word.getSoundResourceId());
                 mMediaPlayer.start();
 
@@ -75,6 +122,8 @@ public class FamilyActivity extends AppCompatActivity {
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
+
         }
 
     }
