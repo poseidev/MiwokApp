@@ -6,6 +6,7 @@
     android:orientation="horizontal"
     android:minHeight="@dimen/list_item_height"
     android:background="@color/tan_background"
+    android:gravity="center_vertical"
     android:id="@+id/mainLayout">
 
      <ImageView
@@ -13,32 +14,50 @@
          android:layout_height="@dimen/list_item_height"
          android:id="@+id/image"/>
 
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:orientation="vertical"
-         android:paddingLeft="16dp"
-         android:id="@+id/textContainer">
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="0dp"
-             android:layout_weight="1"
-             android:gravity="bottom"
-             android:textAppearance="?android:textAppearanceMedium"
-             android:textColor="@android:color/white"
-             android:textStyle="bold"
-             tools:text="lutti"
-             android:id="@+id/miwokTextView"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingRight="16dp"
+        android:gravity="center_vertical"
+        android:id="@+id/textContainer">
 
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="0dp"
-             android:layout_weight="1"
-             android:gravity="top"
-             android:textAppearance="?android:textAppearanceMedium"
-             android:textColor="@android:color/white"
-             tools:text="one"
-             android:id="@+id/defaultTextView"/>
-     </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:paddingLeft="16dp">
+
+            <TextView
+                android:id="@+id/miwokTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                tools:text="lutti" />
+
+            <TextView
+                android:id="@+id/defaultTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@android:color/white"
+                tools:text="one" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_weight="0"
+            android:src="@drawable/ic_play_arrow" />
+
+    </LinearLayout>
+
 
 </LinearLayout>
