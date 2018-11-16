@@ -125,6 +125,5 @@ public class ColorsActivity extends AppCompatActivity {
 
             mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
         }
-
     }
 }
