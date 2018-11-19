@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -102,6 +103,8 @@ public class FamilyActivity extends AppCompatActivity {
                 mMediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -109,6 +112,17 @@ public class FamilyActivity extends AppCompatActivity {
         super.onStop();
 
         releaseMediaPlayer();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.mainLayout:
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void releaseMediaPlayer() {
@@ -123,8 +137,7 @@ public class FamilyActivity extends AppCompatActivity {
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
 
-
+            mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
         }
-
     }
 }

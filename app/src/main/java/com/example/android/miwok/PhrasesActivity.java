@@ -104,6 +104,8 @@ public class PhrasesActivity extends AppCompatActivity {
                 mMediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

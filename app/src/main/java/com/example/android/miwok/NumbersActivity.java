@@ -98,6 +98,8 @@ public class NumbersActivity extends AppCompatActivity {
                 mMediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

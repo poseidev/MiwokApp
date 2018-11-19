@@ -1,11 +1,15 @@
 package com.example.android.miwok;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -102,6 +106,8 @@ public class ColorsActivity extends AppCompatActivity {
                mMediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -109,6 +115,18 @@ public class ColorsActivity extends AppCompatActivity {
         super.onStop();
 
         releaseMediaPlayer();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.mainLayout:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void releaseMediaPlayer() {
