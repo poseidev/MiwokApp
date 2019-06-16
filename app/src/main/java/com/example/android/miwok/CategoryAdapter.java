@@ -1,14 +1,18 @@
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 public class CategoryAdapter extends FragmentPagerAdapter
 {
-    public CategoryAdapter(FragmentManager fm)
+    private Context mContext;
+
+    public CategoryAdapter(Context context, FragmentManager fm)
     {
         super(fm);
+        mContext = context;
     }
 
     @Override
@@ -51,19 +55,19 @@ public class CategoryAdapter extends FragmentPagerAdapter
         switch (position)
         {
             case 0:
-                title = "Colors";
+                title = mContext.getString(R.string.category_colors);
                 break;
 
             case 1:
-                title = "Family";
+                title = mContext.getString(R.string.category_family);
                 break;
 
             case 2:
-                title = "Numbers";
+                title = mContext.getString(R.string.category_numbers);
                 break;
 
             case 3:
-                title = "Phrases";
+                title = mContext.getString(R.string.category_phrases);
                 break;
 
             default:

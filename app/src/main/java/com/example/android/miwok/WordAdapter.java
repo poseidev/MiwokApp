@@ -38,13 +38,13 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         Word currentWord = getItem(position);
 
-        TextView defaultTranslation = (TextView)listItemView.findViewById(R.id.defaultTextView);
+        TextView defaultTranslation = listItemView.findViewById(R.id.defaultTextView);
         defaultTranslation.setText(currentWord.getDefaultTranslation());
 
-        TextView miwokTranslation = (TextView)listItemView.findViewById(R.id.miwokTextView);
+        TextView miwokTranslation = listItemView.findViewById(R.id.miwokTextView);
         miwokTranslation.setText(currentWord.getMiwokTranslation());
 
-        ImageView imageView = (ImageView) listItemView.findViewById(R.id.image);
+        ImageView imageView = listItemView.findViewById(R.id.image);
         if(currentWord.hasImage()) {
             imageView.setImageResource(currentWord.getImageResourceId());
             imageView.setVisibility(View.VISIBLE);
@@ -53,7 +53,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
             imageView.setVisibility(View.GONE);
         }
 
-        View textContainer = (LinearLayout) listItemView.findViewById(R.id.textContainer);
+        View textContainer = listItemView.findViewById(R.id.textContainer);
 
         //Find the color that the resource ID maps to
         int color = ContextCompat.getColor(getContext(), mColorResourceId);

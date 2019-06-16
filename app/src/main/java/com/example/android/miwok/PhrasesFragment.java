@@ -107,7 +107,6 @@ public class PhrasesFragment extends Fragment {
                     return;
                 }
 
-                Log.v("PhrasesActivity", "Play sound.");
                 mMediaPlayer = MediaPlayer.create(getActivity(), word.getSoundResourceId());
                 mMediaPlayer.start();
 

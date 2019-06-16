@@ -75,7 +75,7 @@ public class NumbersFragment extends Fragment {
 
         WordAdapter itemsAdapter = new WordAdapter(getActivity(), words, R.color.category_numbers);
 
-        ListView listView = (ListView) rootView.findViewById(R.id.list);
+        ListView listView = rootView.findViewById(R.id.list);
 
         listView.setAdapter(itemsAdapter);
 
